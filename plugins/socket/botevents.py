@@ -66,11 +66,12 @@ def register_bot_events(socketio, state):
         socketio.emit("pokestop_visited", emitted_object, namespace="/event")
 
     @manager.on("pokemon_caught")
-    def pokemon_caught(bot=None, pokemon=None):
+    def pokemon_caught(bot=None, pokemon=None, position=None):
         if pokemon is None:
             return
         emitted_object = {
-            "pokemon": pokemon
+            "pokemon": pokemon,
+            "position": position
         }
         socketio.emit("pokemon_caught", emitted_object, namespace="/event")
 
