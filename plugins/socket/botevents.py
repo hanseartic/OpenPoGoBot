@@ -75,6 +75,16 @@ def register_bot_events(socketio, state):
         }
         socketio.emit("pokemon_caught", emitted_object, namespace="/event")
 
+    @manager.on("pokemon_evolved")
+    def pokemon_evolved(bot=None, pokemon=None, evolution=None):
+        if pokemon is None:
+            return
+        emitted_object = {
+            "pokemon": pokemon,
+            "evolution": evolution
+        }
+        socketio.emit("pokemon_evolved", emitted_object, namespace="/event")
+
     @manager.on("after_transfer_pokemon")
     def transfer_pokemon(bot=None, pokemon=None):
         if pokemon is None:
@@ -82,4 +92,4 @@ def register_bot_events(socketio, state):
         emitted_object = {
             "pokemon": pokemon
         }
-        socketio.emit("transfer_pokemon", emitted_object, namespace="/event")
+        socketio.emit("transfered_pokemon", emitted_object, namespace="/event")
